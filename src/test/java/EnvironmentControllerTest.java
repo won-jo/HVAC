@@ -43,6 +43,12 @@ public class EnvironmentControllerTest {
 		Assert.assertFalse(hvac.isHeatOn());
 	}
 	
-	
+	@Test
+	public void fanCantRunFor5MinsAfterHeaterOff() {
+		// turning off
+		hvac.heat(true);
+		hvac.heat(false);
+		
+	}
  
 }
