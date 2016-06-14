@@ -9,6 +9,16 @@ public class EnvironmentController {
 
 	public void tick() {
 		
+		if(hvac.temp() < 65) {
+			hvac.heat(true);
+			hvac.fan(true);
+			hvac.cool(false);
+		} else if(hvac.temp() > 75) {
+			hvac.heat(false);
+			hvac.fan(true);
+			hvac.cool(true);
+		}
+		
 	}
 
 }

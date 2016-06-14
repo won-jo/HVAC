@@ -22,5 +22,27 @@ public class EnvironmentControllerTest {
 		Assert.assertFalse(hvac.isCoolOn());
 		Assert.assertFalse(hvac.isHeatOn());
 	}
-
+	
+	@Test
+	public void tempLessThan65() {
+		hvac.setTemp(60);
+		controller.tick();
+		
+		Assert.assertTrue(hvac.isHeatOn());
+		Assert.assertFalse(hvac.isCoolOn());
+		Assert.assertTrue(hvac.isFanOn());
+	}
+	
+	@Test
+	public void tempGreaterThan75() {
+		hvac.setTemp(80);
+		controller.tick();
+		
+		Assert.assertTrue(hvac.isCoolOn());
+		Assert.assertTrue(hvac.isFanOn());
+		Assert.assertFalse(hvac.isHeatOn());
+	}
+	
+	
+ 
 }
