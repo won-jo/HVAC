@@ -21,6 +21,7 @@ public class ServerSocketWrapper {
     }
 
     public void stop() throws IOException {
-        serverSocket.close();
+    	if(serverSocket != null)
+    		serverSocket.close();
     }
 }
