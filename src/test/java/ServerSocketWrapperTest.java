@@ -29,7 +29,7 @@ public class ServerSocketWrapperTest {
     }
 
     @Test
-    public void itStartsAndStopsAServer() throws IOException {
+    public void itStartsAndStopsAServer() throws IOException, InterruptedException {
         Function<String, String> dummyRouter = string -> "";
         startServerSocket(dummyRouter);
 
@@ -64,7 +64,7 @@ public class ServerSocketWrapperTest {
     }
 
     @Test
-    public void itWritesBackWhatTheRouterReturns() throws IOException {
+    public void itWritesBackWhatTheRouterReturns() throws IOException, InterruptedException {
         Function<String, String> router = string -> "returned data\n";
         startServerSocket(router);
 
@@ -137,7 +137,7 @@ public class ServerSocketWrapperTest {
         out.flush();
     }
 
-    private void startServerSocket(Function<String, String> router) {
+    private void startServerSocket(Function<String, String> router) throws InterruptedException {
         new Thread() {
             public void run() {
                 try {
@@ -147,5 +147,7 @@ public class ServerSocketWrapperTest {
                 }
             }
         }.start();
+        
+        Thread.sleep(100);
     }
 }
