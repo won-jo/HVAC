@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ConnectException;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.function.Function;
 
 import static junit.framework.TestCase.*;
@@ -25,8 +24,7 @@ public class ServerSocketWrapperTest {
 
     @After
     public void tearDown() throws IOException {
-    	if(wrapper != null)
-    		wrapper.stop();
+    	wrapper.stop();
     }
 
     @Test
