@@ -90,9 +90,57 @@ public class EnvironmentControllerTest {
 		
 		Assert.assertFalse(hvac.isHeatOn());
 		Assert.assertTrue(hvac.isCoolOn());
+		Assert.assertFalse(hvac.isFanOn());
+		
+		controller.tick();
+		
+		Assert.assertFalse(hvac.isHeatOn());
+		Assert.assertTrue(hvac.isCoolOn());
+		Assert.assertTrue(hvac.isFanOn());
+	}
+	
+	@Test
+	public void fanCantRunFor3MinsAfterCoolerOff() {
+		hvac.setTemp(80);
+		controller.tick();
+		
+		Assert.assertFalse(hvac.isHeatOn());
+		Assert.assertTrue(hvac.isCoolOn());
 		Assert.assertTrue(hvac.isFanOn());
 		
+		// turning off the cooler
+		hvac.setTemp(70);
+		controller.tick();
 		
+		Assert.assertFalse(hvac.isHeatOn());
+		Assert.assertFalse(hvac.isCoolOn());
+		Assert.assertFalse(hvac.isFanOn());
+		
+		// first minute after heat turn off
+		hvac.setTemp(60);
+		controller.tick();
+				
+		Assert.assertTrue(hvac.isHeatOn());
+		Assert.assertFalse(hvac.isCoolOn());
+		Assert.assertFalse(hvac.isFanOn());
+		
+		controller.tick();
+		
+		Assert.assertTrue(hvac.isHeatOn());
+		Assert.assertFalse(hvac.isCoolOn());
+		Assert.assertFalse(hvac.isFanOn());
+		
+		controller.tick();
+		
+		Assert.assertTrue(hvac.isHeatOn());
+		Assert.assertFalse(hvac.isCoolOn());
+		Assert.assertFalse(hvac.isFanOn());
+		
+		controller.tick();
+		
+		Assert.assertTrue(hvac.isHeatOn());
+		Assert.assertFalse(hvac.isCoolOn());
+		Assert.assertTrue(hvac.isFanOn());
 	}
  
 }

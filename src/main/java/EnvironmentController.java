@@ -22,13 +22,13 @@ public class EnvironmentController {
 			
 			if(coolStatus) {
 				hvac.cool(false);
-				coolerTurnOffTimer = 3;
+				coolerTurnOffTimer = 4;
 				coolStatus = false;
 			}
 		} else if(hvac.temp() > 75) {
 			if(heatStatus) {
 				hvac.heat(false);
-				heaterTurnOffTimer = 5;
+				heaterTurnOffTimer = 6;
 				heatStatus = false;
 			}
 			if(coolerTurnOffTimer == 0 && heaterTurnOffTimer == 0)
@@ -39,12 +39,12 @@ public class EnvironmentController {
 		} else if(hvac.temp() >= 65 && hvac.temp() <= 75) {
 			if(heatStatus) {
 				hvac.heat(false);
-				heaterTurnOffTimer = 5;
+				heaterTurnOffTimer = 6;
 				heatStatus = false;
 			}
 			if(coolStatus) {
 				hvac.cool(false);
-				coolerTurnOffTimer = 3;
+				coolerTurnOffTimer = 4;
 				coolStatus = false;
 			}
 			hvac.fan(false);
