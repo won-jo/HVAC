@@ -23,8 +23,9 @@ public class ServerSocketWrapperTest {
     }
 
     @After
-    public void tearDown() throws IOException {
+    public void tearDown() throws IOException, InterruptedException {
     	wrapper.stop();
+    	Thread.sleep(100);
     }
 
     @Test
