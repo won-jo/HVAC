@@ -57,4 +57,8 @@ public class EnvironmentController {
 		heaterTurnOffTimer = heaterTurnOffTimer == 0 ? 0 : heaterTurnOffTimer - 1;
 		coolerTurnOffTimer = coolerTurnOffTimer == 0 ? 0 : coolerTurnOffTimer - 1;
  	}
+	
+	public HVAC getHvac() {
+		return this.hvac;
+	}
 }
