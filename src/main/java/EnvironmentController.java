@@ -15,48 +15,62 @@ public class EnvironmentController {
 
 	public void tick() {
 		if(hvac.temp() < 71) {
-			hvac.heat(true);
-			heatStatus = true;
+			turnOnHeater();
 			
-			if(coolStatus) {
-				hvac.cool(false);
-				coolerTurnOffTimer = 4;
-				coolStatus = false;
-				hvac.fan(false);
-			}
+			if(coolStatus)
+				turnOffCooler();
 			
-			if(coolerTurnOffTimer == 0 && heaterTurnOffTimer == 0)
+			if(isFanAvailable())
 				hvac.fan(true);
 		} else if(hvac.temp() > 72) {
-			if(heatStatus) {
-				hvac.heat(false);
-				heaterTurnOffTimer = 6;
-				heatStatus = false;
-				hvac.fan(false);
-			}
+			if(heatStatus)
+				turnOffHeater();
 			
-			hvac.cool(true);
-			coolStatus = true;
+			turnOnCooler();
 			
-			if(coolerTurnOffTimer == 0 && heaterTurnOffTimer == 0)
+			if(isFanAvailable())
 				hvac.fan(true);
 		} else {
-			if(heatStatus) {
-				hvac.heat(false);
-				heaterTurnOffTimer = 6;
-				heatStatus = false;
-			}
-			if(coolStatus) {
-				hvac.cool(false);
-				coolerTurnOffTimer = 4;
-				coolStatus = false;
-			}
+			if(heatStatus)
+				turnOffHeater();
+			
+			if(coolStatus) 
+				turnOffCooler();
+			
 			hvac.fan(false);
 		}
 		
 		heaterTurnOffTimer = heaterTurnOffTimer == 0 ? 0 : heaterTurnOffTimer - 1;
 		coolerTurnOffTimer = coolerTurnOffTimer == 0 ? 0 : coolerTurnOffTimer - 1;
  	}
+	
+	private void turnOffHeater() {
+		hvac.heat(false);
+		heaterTurnOffTimer = 6;
+		heatStatus = false;
+		hvac.fan(false);
+	}
+	
+	private void turnOffCooler() {
+		hvac.cool(false);
+		coolerTurnOffTimer = 4;
+		coolStatus = false;
+		hvac.fan(false);
+	}
+	
+	private void turnOnHeater() {
+		hvac.heat(true);
+		heatStatus = true;
+	}
+	
+	private void turnOnCooler() {
+		hvac.cool(true);
+		coolStatus = true;
+	}
+	
+	private boolean isFanAvailable() {
+		return coolerTurnOffTimer == 0 && heaterTurnOffTimer == 0;
+	}
 	
 	public HVAC getHvac() {
 		return this.hvac;
