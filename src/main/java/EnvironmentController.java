@@ -9,12 +9,15 @@ public class EnvironmentController {
 	private boolean coolOn;
 	private boolean heatOn;
 	
+	private int lowRange;
+	private int highRange;
+	
 	public EnvironmentController(HVAC hvac) {
 		this.hvac = hvac;
 	}
 
 	public void tick() {
-		if(hvac.temp() < 71) {
+		if(hvac.temp() < lowRange) {
 			turnOnHeater();
 			
 			if(coolOn)
@@ -22,7 +25,7 @@ public class EnvironmentController {
 			
 			if(isFanAvailable())
 				hvac.fan(true);
-		} else if(hvac.temp() > 72) {
+		} else if(hvac.temp() > highRange) {
 			if(heatOn)
 				turnOffHeater();
 			
@@ -72,6 +75,22 @@ public class EnvironmentController {
 		return coolerTurnOffTimer == 0 && heaterTurnOffTimer == 0;
 	}
 	
+	public int getLowRange() {
+		return lowRange;
+	}
+
+	public void setLowRange(int lowRange) {
+		this.lowRange = lowRange;
+	}
+
+	public int getHighRange() {
+		return highRange;
+	}
+
+	public void setHighRange(int highRange) {
+		this.highRange = highRange;
+	}
+
 	public HVAC getHvac() {
 		return this.hvac;
 	}
