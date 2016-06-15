@@ -14,29 +14,33 @@ public class EnvironmentController {
 	}
 
 	public void tick() {
-		if(hvac.temp() < 65) {
+		if(hvac.temp() < 71) {
 			hvac.heat(true);
 			heatStatus = true;
-			if(coolerTurnOffTimer == 0 && heaterTurnOffTimer == 0)
-				hvac.fan(true);
 			
 			if(coolStatus) {
 				hvac.cool(false);
 				coolerTurnOffTimer = 4;
 				coolStatus = false;
+				hvac.fan(false);
 			}
-		} else if(hvac.temp() > 75) {
+			
+			if(coolerTurnOffTimer == 0 && heaterTurnOffTimer == 0)
+				hvac.fan(true);
+		} else if(hvac.temp() > 72) {
 			if(heatStatus) {
 				hvac.heat(false);
 				heaterTurnOffTimer = 6;
 				heatStatus = false;
+				hvac.fan(false);
 			}
-			if(coolerTurnOffTimer == 0 && heaterTurnOffTimer == 0)
-				hvac.fan(true);
 			
 			hvac.cool(true);
 			coolStatus = true;
-		} else if(hvac.temp() >= 65 && hvac.temp() <= 75) {
+			
+			if(coolerTurnOffTimer == 0 && heaterTurnOffTimer == 0)
+				hvac.fan(true);
+		} else if(hvac.temp() >= 71 && hvac.temp() <= 72) {
 			if(heatStatus) {
 				hvac.heat(false);
 				heaterTurnOffTimer = 6;
