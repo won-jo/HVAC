@@ -6,8 +6,8 @@ public class EnvironmentController {
 	private int heaterTurnOffTimer;
 	private int coolerTurnOffTimer;
 	
-	private boolean coolStatus;
-	private boolean heatStatus;
+	private boolean coolOn;
+	private boolean heatOn;
 	
 	public EnvironmentController(HVAC hvac) {
 		this.hvac = hvac;
@@ -17,13 +17,13 @@ public class EnvironmentController {
 		if(hvac.temp() < 71) {
 			turnOnHeater();
 			
-			if(coolStatus)
+			if(coolOn)
 				turnOffCooler();
 			
 			if(isFanAvailable())
 				hvac.fan(true);
 		} else if(hvac.temp() > 72) {
-			if(heatStatus)
+			if(heatOn)
 				turnOffHeater();
 			
 			turnOnCooler();
@@ -31,10 +31,10 @@ public class EnvironmentController {
 			if(isFanAvailable())
 				hvac.fan(true);
 		} else {
-			if(heatStatus)
+			if(heatOn)
 				turnOffHeater();
 			
-			if(coolStatus) 
+			if(coolOn) 
 				turnOffCooler();
 			
 			hvac.fan(false);
@@ -47,25 +47,25 @@ public class EnvironmentController {
 	private void turnOffHeater() {
 		hvac.heat(false);
 		heaterTurnOffTimer = 6;
-		heatStatus = false;
+		heatOn = false;
 		hvac.fan(false);
 	}
 	
 	private void turnOffCooler() {
 		hvac.cool(false);
 		coolerTurnOffTimer = 4;
-		coolStatus = false;
+		coolOn = false;
 		hvac.fan(false);
 	}
 	
 	private void turnOnHeater() {
 		hvac.heat(true);
-		heatStatus = true;
+		heatOn = true;
 	}
 	
 	private void turnOnCooler() {
 		hvac.cool(true);
-		coolStatus = true;
+		coolOn = true;
 	}
 	
 	private boolean isFanAvailable() {
