@@ -44,84 +44,6 @@ public class EnvironmentControllerTest {
 	}
 	
 	@Test
-	public void fanCantRunAfter1MinAfterHeaterOff() {
-		hvac.setTemp(60);
-		controller.tick();
-		
-		// turning off the heater
-		hvac.setTemp(71);
-		controller.tick();
-		
-		// first minute after heat turn off
-		hvac.setTemp(80);
-		controller.tick();
-		
-		Assert.assertFalse(hvac.isHeatOn());
-		Assert.assertTrue(hvac.isCoolOn());
-		Assert.assertFalse(hvac.isFanOn());
-	}
-	
-	@Test
-	public void fanCantRunAfter2MinAfterHeaterOff() {
-		hvac.setTemp(60);
-		controller.tick();
-		
-		// turning off the heater
-		hvac.setTemp(71);
-		controller.tick();
-		
-		// first minute after heat turn off
-		hvac.setTemp(80);
-		controller.tick();
-		controller.tick();
-		
-		Assert.assertFalse(hvac.isHeatOn());
-		Assert.assertTrue(hvac.isCoolOn());
-		Assert.assertFalse(hvac.isFanOn());
-	}
-	
-	@Test
-	public void fanCantRunAfter3MinAfterHeaterOff() {
-		hvac.setTemp(60);
-		controller.tick();
-		
-		// turning off the heater
-		hvac.setTemp(71);
-		controller.tick();
-		
-		// first minute after heat turn off
-		hvac.setTemp(80);
-		controller.tick();
-		controller.tick();
-		controller.tick();
-		
-		Assert.assertFalse(hvac.isHeatOn());
-		Assert.assertTrue(hvac.isCoolOn());
-		Assert.assertFalse(hvac.isFanOn());
-	}
-	
-	@Test
-	public void fanCantRunAfter4MinAfterHeaterOff() {
-		hvac.setTemp(60);
-		controller.tick();
-		
-		// turning off the heater
-		hvac.setTemp(71);
-		controller.tick();
-		
-		// first minute after heat turn off
-		hvac.setTemp(80);
-		controller.tick();
-		controller.tick();
-		controller.tick();
-		controller.tick();
-		
-		Assert.assertFalse(hvac.isHeatOn());
-		Assert.assertTrue(hvac.isCoolOn());
-		Assert.assertFalse(hvac.isFanOn());
-	}
-	
-	@Test
 	public void fanCantRunAfter5MinAfterHeaterOff() {
 		hvac.setTemp(60);
 		controller.tick();
@@ -130,17 +52,14 @@ public class EnvironmentControllerTest {
 		hvac.setTemp(71);
 		controller.tick();
 		
-		// first minute after heat turn off
 		hvac.setTemp(80);
-		controller.tick();
-		controller.tick();
-		controller.tick();
-		controller.tick();
-		controller.tick();
-		
-		Assert.assertFalse(hvac.isHeatOn());
-		Assert.assertTrue(hvac.isCoolOn());
-		Assert.assertFalse(hvac.isFanOn());
+		for(int i = 0; i < 5; i++) {
+			controller.tick();
+			
+			Assert.assertFalse(hvac.isHeatOn());
+			Assert.assertTrue(hvac.isCoolOn());
+			Assert.assertFalse(hvac.isFanOn());
+		}
 	}
 	
 	@Test
@@ -166,43 +85,6 @@ public class EnvironmentControllerTest {
 	}
 	
 	@Test
-	public void fanCantRunAfter1MinAfterCoolerOff() {
-		hvac.setTemp(80);
-		controller.tick();
-		
-		// turning off the cooler
-		hvac.setTemp(72);
-		controller.tick();
-		
-		// first minute after heat turn off
-		hvac.setTemp(60);
-		controller.tick();
-				
-		Assert.assertTrue(hvac.isHeatOn());
-		Assert.assertFalse(hvac.isCoolOn());
-		Assert.assertFalse(hvac.isFanOn());
-	}
-	
-	@Test
-	public void fanCantRunAfter2MinAfterCoolerOff() {
-		hvac.setTemp(80);
-		controller.tick();
-		
-		// turning off the cooler
-		hvac.setTemp(72);
-		controller.tick();
-		
-		// first minute after heat turn off
-		hvac.setTemp(60);
-		controller.tick();
-		controller.tick();
-				
-		Assert.assertTrue(hvac.isHeatOn());
-		Assert.assertFalse(hvac.isCoolOn());
-		Assert.assertFalse(hvac.isFanOn());
-	}
-	
-	@Test
 	public void fanCantRunAfter3MinAfterCoolerOff() {
 		hvac.setTemp(80);
 		controller.tick();
@@ -211,15 +93,15 @@ public class EnvironmentControllerTest {
 		hvac.setTemp(72);
 		controller.tick();
 		
-		// first minute after heat turn off
 		hvac.setTemp(60);
-		controller.tick();
-		controller.tick();
-		controller.tick();
-				
-		Assert.assertTrue(hvac.isHeatOn());
-		Assert.assertFalse(hvac.isCoolOn());
-		Assert.assertFalse(hvac.isFanOn());
+		
+		for(int i = 0; i < 3; i++) {
+			controller.tick();
+					
+			Assert.assertTrue(hvac.isHeatOn());
+			Assert.assertFalse(hvac.isCoolOn());
+			Assert.assertFalse(hvac.isFanOn());
+		}
 	}
 	
 	@Test
