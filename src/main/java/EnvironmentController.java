@@ -13,6 +13,8 @@ public class EnvironmentController {
 	private int highRange;
 	
 	public EnvironmentController(HVAC hvac) {
+		this.lowRange = 65;
+		this.highRange = 75;
 		this.hvac = hvac;
 	}
 

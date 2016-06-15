@@ -130,7 +130,7 @@ public class EnvironmentControllerTest {
 		hvac.setTemp(76);
 		controller.tick();
 		
-		hvac.setTemp(69);
+		hvac.setTemp(60);
 		controller.tick();
 		
 		Assert.assertTrue(hvac.isHeatOn());
@@ -140,7 +140,7 @@ public class EnvironmentControllerTest {
 	
 	@Test
 	public void fromHeaterToCooler() {
-		hvac.setTemp(69);
+		hvac.setTemp(60);
 		controller.tick();
 		
 		hvac.setTemp(76);
