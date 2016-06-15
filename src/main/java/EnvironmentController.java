@@ -40,7 +40,7 @@ public class EnvironmentController {
 			
 			if(coolerTurnOffTimer == 0 && heaterTurnOffTimer == 0)
 				hvac.fan(true);
-		} else if(hvac.temp() >= 71 && hvac.temp() <= 72) {
+		} else {
 			if(heatStatus) {
 				hvac.heat(false);
 				heaterTurnOffTimer = 6;
