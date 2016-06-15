@@ -25,7 +25,8 @@ public class ServerSocketWrapperTest {
 
     @After
     public void tearDown() throws IOException {
-        wrapper.stop();
+    	if(wrapper != null)
+    		wrapper.stop();
     }
 
     @Test
