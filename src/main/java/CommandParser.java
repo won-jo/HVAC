@@ -12,18 +12,18 @@ public class CommandParser {
 		environmentController = new EnvironmentController(hvac);
 	}
 
-	public void parse(String command) {
+	public String parse(String command) {
 		String[] args = command.split(" ");
 		
 		switch (args[0]) {
 		case "set_high":
 			environmentController.setHighRange(Integer.parseInt(args[1]));
-			break;
+			return "ok";
 		case "set_low":
 			environmentController.setLowRange(Integer.parseInt(args[1]));
-			break;
+			return "ok";
 		default:
-			break;
+			return "wrong command";
 		}
 	}
 	

@@ -6,7 +6,6 @@ import java.util.function.Function;
 public class ServerSocketWrapper {
     private ServerSocket serverSocket;
     private Socket socket;
-    private Function<String, String> router;
 
     public void start(Function<String, String> router, int port) throws IOException {
         serverSocket = new ServerSocket(port);

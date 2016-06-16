@@ -6,8 +6,7 @@ public class HVACRouter {
 	
 	Function<String, String> hvacRouter = new Function<String, String>() {
 	    public String apply(String command) {
-	    	parser.parse(command);
-	        String result = "";
+	    	String result = parser.parse(command);
 	        return result;
 	    }
 	};

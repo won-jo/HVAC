@@ -1,8 +1,5 @@
 import static junit.framework.TestCase.assertEquals;
 
-import java.io.IOException;
-import java.net.UnknownHostException;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,11 +26,18 @@ public class CommandParserTest {
     
     
     @Test
-    public void decreaseLowTemperatureValue() throws UnknownHostException, IOException {
+    public void decreaseLowTemperatureValue() {
     	parser.parse("set_low 60");
 		
 		int low = parser.getLowValue();
 		
 		assertEquals(60, low);
+    }
+    
+    @Test
+    public void wrongCommand() {
+    	String response = parser.parse("increase temp to 120");
+    	
+    	assertEquals("wrong command", response);
     }
 }
