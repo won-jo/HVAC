@@ -85,9 +85,7 @@ public class ServerSocketWrapperTest {
     	HVAC hvac = new HVACMock();
     	Function<String, String> router = command -> {
     		CommandParser parser = new CommandParser(hvac);
-    		parser.parse(command);
-    		String value =  parser.getHighValue().toString();
-    		return value + "\n";
+    		return parser.parse(command) + "\n";
     	};
     	
     	startServerSocket(router);
@@ -99,7 +97,7 @@ public class ServerSocketWrapperTest {
         socket.setSoTimeout(50);
         String readData = reader.readLine();
         
-        assertEquals(80, Integer.parseInt(readData));
+        assertEquals("code - 1001 : description - success", readData);
     }
     
     
@@ -108,9 +106,7 @@ public class ServerSocketWrapperTest {
     	HVAC hvac = new HVACMock();
     	Function<String, String> router = command -> {
     		CommandParser parser = new CommandParser(hvac);
-    		parser.parse(command);
-    		String value =  parser.getLowValue().toString();
-    		return value + "\n";
+    		return parser.parse(command) + "\n";
     	};
     	
     	startServerSocket(router);
@@ -122,7 +118,7 @@ public class ServerSocketWrapperTest {
         socket.setSoTimeout(50);
         String readData = reader.readLine();
         
-        assertEquals(60, Integer.parseInt(readData));
+        assertEquals("code - 1001 : description - success", readData);
     }
  
     private void waitForDataToBePresent(String s) throws InterruptedException {

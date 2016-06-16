@@ -21,7 +21,7 @@ public class CommandParserTest {
 		
 		int high = parser.getHighValue();
 		
-		assertEquals("code - 1001 - description : success", response);
+		assertEquals("code - 1001 : description - success", response);
 		assertEquals(80, high);
     }
     
@@ -32,7 +32,7 @@ public class CommandParserTest {
 		
 		int low = parser.getLowValue();
 		
-		assertEquals("code - 1001 - description : success", response);
+		assertEquals("code - 1001 : description - success", response);
 		assertEquals(60, low);
     }
     

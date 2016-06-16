@@ -32,7 +32,7 @@ public class CommandParser {
 		
 		switch (response) {
 			case 1001:
-				return "code - 1001 - description : success";
+				return "code - 1001 : description - success";
 			case 4001:
 				return "code - 4001 : description - high range must be greater than low range";
 			case 4003:
