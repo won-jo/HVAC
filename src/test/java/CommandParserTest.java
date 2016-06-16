@@ -50,4 +50,29 @@ public class CommandParserTest {
     	assertEquals("code - 4001 : description - high range must be greater than low range", response);
     	
     }
+    
+    @Test
+    public void setLowRangeValueGreaterThanHighRange() {
+    	parser.parse("set_high 70");
+    	
+    	String response = parser.parse("set_low 75");
+    	
+    	assertEquals("code - 4002 : description - low range must be less than high range", response);
+    }
+    
+    @Test
+    public void setHighRangeGreaterThanMaxTempAllowed() {
+    	String response = parser.parse("set_high 150");
+    	
+    	assertEquals("code - 4003 : description - high range must be less than 130", response);
+    	
+    }
+    
+    @Test
+    public void setLowRangeLessThanMinTempAllowed() {
+    	String response = parser.parse("set_low 20");
+    	
+    	assertEquals("code - 4004 : description - low range must be greater than 32", response);
+    	
+    }
 }

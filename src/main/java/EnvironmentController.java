@@ -12,6 +12,9 @@ public class EnvironmentController {
 	private int lowRange;
 	private int highRange;
 	
+	private final int MAX_TEMP = 130;
+	private final int MIN_TEMP = 32;
+	
 	public EnvironmentController(HVAC hvac) {
 		this.lowRange = 65;
 		this.highRange = 75;
@@ -81,18 +84,36 @@ public class EnvironmentController {
 		return lowRange;
 	}
 
-	public void setLowRange(int lowRange) {
+	public int setLowRange(int lowRange) {
+		if(lowRange > this.highRange)
+			return 4002;
+		if(lowRange < MIN_TEMP)
+			return 4004;
+		if(lowRange == this.highRange)
+			return 4005;
 		this.lowRange = lowRange;
+		return 1001;
 	}
 
 	public int getHighRange() {
 		return highRange;
 	}
+	
+	public int getMAX_TEMP() {
+		return MAX_TEMP;
+	}
+
+	public int getMIN_TEMP() {
+		return MIN_TEMP;
+	}
 
 	public int setHighRange(int highRange) {
 		if(highRange < this.lowRange)
 			return 4001;
-		
+		if(highRange > MAX_TEMP)
+			return 4003;
+		if(highRange == this.lowRange)
+			return 4005;
 		this.highRange = highRange;
 		return 1001;
 	}
