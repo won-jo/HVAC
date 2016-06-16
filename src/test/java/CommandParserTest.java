@@ -73,6 +73,16 @@ public class CommandParserTest {
     	String response = parser.parse("set_low 20");
     	
     	assertEquals("code - 4004 : description - low range must be greater than 32", response);
+    }
+    
+    @Test
+    public void invalidArguments() {
+    	String response = parser.parse("set_low 12ab");
     	
+    	assertEquals("code - 4101 : description - invalid arguments", response);
+    	
+    	response = parser.parse("set_high 12ab");
+    	
+    	assertEquals("code - 4101 : description - invalid arguments", response);
     }
 }

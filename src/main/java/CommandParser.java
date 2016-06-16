@@ -15,18 +15,20 @@ public class CommandParser {
 	public String parse(String command) {
 		String[] args = command.split(" ");
 		int response;
-		
-		switch (args[0]) {
-		case "set_high":
-			response = ec.setHighRange(Integer.parseInt(args[1]));
-			break;
-		case "set_low":
-			response = ec.setLowRange(Integer.parseInt(args[1]));
-			break;
-		default:
-			return "code - 4100 : description - wrong command";
+		try {
+			switch (args[0]) {
+				case "set_high":
+					response = ec.setHighRange(Integer.parseInt(args[1]));
+					break;
+				case "set_low":
+					response = ec.setLowRange(Integer.parseInt(args[1]));
+					break;
+				default:
+					response = 4100;
+			}
+		} catch(NumberFormatException e) {
+			response = 4101;
 		}
-		
 		
 		switch (response) {
 			case 1001:
@@ -41,6 +43,10 @@ public class CommandParser {
 				return "code - 4004 : description - low range must be greater than " + ec.getMIN_TEMP();
 			case 4005:
 				return "code - 4005 : description - high and low range can not be equal";
+			case 4100:
+				return "code - 4100 : description - wrong command";
+			case 4101:
+				return "code - 4101 : description - invalid arguments";
 			default:  
 				return "code - 5001 : description - server error";
 		}

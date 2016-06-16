@@ -38,6 +38,7 @@ public class ServerSocketWrapperTest {
         }
 
         wrapper.stop();
+        Thread.sleep(100);
         try {
             new Socket(HOST, PORT);
             fail("Socket should not connect when there is no server running");
