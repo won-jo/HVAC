@@ -89,8 +89,12 @@ public class EnvironmentController {
 		return highRange;
 	}
 
-	public void setHighRange(int highRange) {
+	public int setHighRange(int highRange) {
+		if(highRange < this.lowRange)
+			return 4001;
+		
 		this.highRange = highRange;
+		return 1001;
 	}
 
 	public HVAC getHvac() {

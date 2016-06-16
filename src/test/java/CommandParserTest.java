@@ -38,6 +38,16 @@ public class CommandParserTest {
     public void wrongCommand() {
     	String response = parser.parse("increase temp to 120");
     	
-    	assertEquals("wrong command", response);
+    	assertEquals("code - 4100 : description - wrong command", response);
+    }
+    
+    @Test
+    public void setHighRangeValueLessThanLowRange() {
+    	parser.parse("set_low 70");
+    	
+    	String response = parser.parse("set_high 69");
+    	
+    	assertEquals("code - 4001 : description - high range must be greater than low range", response);
+    	
     }
 }

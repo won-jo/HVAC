@@ -8,7 +8,6 @@ import org.junit.Test;
 
 public class HVACRouterTest {
 	
-	
 	private HVACRouter router;
 	
 	@Before
@@ -34,5 +33,12 @@ public class HVACRouterTest {
 		
 		assertEquals(60, low);
     }
-
+    
+    @Test
+    public void wrongCommand() {
+    	String response = router.getHvacRouter().apply("increase temp to 100");
+    	
+    	assertEquals("code - 4100 : description - wrong command", response);
+    	
+    }
 }

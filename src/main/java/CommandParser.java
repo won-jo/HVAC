@@ -17,13 +17,16 @@ public class CommandParser {
 		
 		switch (args[0]) {
 		case "set_high":
-			environmentController.setHighRange(Integer.parseInt(args[1]));
-			return "ok";
+			int response = environmentController.setHighRange(Integer.parseInt(args[1]));
+			if(response == 1001)
+				return "ok";
+			else if(response == 4001)
+				return "code - 4001 : description - high range must be greater than low range";
 		case "set_low":
 			environmentController.setLowRange(Integer.parseInt(args[1]));
 			return "ok";
 		default:
-			return "wrong command";
+			return "code - 4100 : description - wrong command";
 		}
 	}
 	
