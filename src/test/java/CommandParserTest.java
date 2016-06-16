@@ -17,20 +17,22 @@ public class CommandParserTest {
 	
 	@Test
     public void increaseHighTemperatureValue() {
-		parser.parse("set_high 80");
+		String response = parser.parse("set_high 80");
 		
 		int high = parser.getHighValue();
 		
+		assertEquals("code - 1001 - description : success", response);
 		assertEquals(80, high);
     }
     
     
     @Test
     public void decreaseLowTemperatureValue() {
-    	parser.parse("set_low 60");
+    	String response = parser.parse("set_low 60");
 		
 		int low = parser.getLowValue();
 		
+		assertEquals("code - 1001 - description : success", response);
 		assertEquals(60, low);
     }
     
