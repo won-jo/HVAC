@@ -27,6 +27,7 @@ public class CommandParser {
 			return "code - 4100 : description - wrong command";
 		}
 		
+		
 		switch (response) {
 			case 1001:
 				return "ok";
